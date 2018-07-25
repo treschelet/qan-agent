@@ -156,14 +156,12 @@ func (i *Installer) verifyMySQLConnection(dsn dsn.DSN) error {
 
 	d, _ := conn.GetGlobalVarString("version_comment")
 	v, _ := conn.GetGlobalVarString("version")
-	h, _ := conn.GetGlobalVarString("hostname")
+	//h, _ := conn.GetGlobalVarString("hostname")
 	i.mysqlDistro = mysql.Distro(d.String)
 	i.mysqlVersion = v.String
-	i.mysqlHostname = h.String
-	
-	if i.hostname != nil {
-		i.mysqlHostname = i.hostname
-	}
+	//i.mysqlHostname = h.String
+	i.mysqlHostname = i.hostname
+
 	ok, err := conn.AtLeastVersion("5.6.5")
 	if err != nil {
 		return err
